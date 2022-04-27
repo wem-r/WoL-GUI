@@ -6,7 +6,7 @@ import os
 #import subprocess
 #from subprocess import Popen, PIPE
 from sqlalchemy import true
-     
+
 class sim(Frame):
     def __init__(self, master=None):
         Frame.__init__(self, master)
@@ -15,6 +15,7 @@ class sim(Frame):
         myfont = family = ("Century Gothic", 8)
         Green = "#00FF80"
         Red = '#F44336'
+        Yellow = '#FF9800'
         # White Square Block
         canvas = Canvas(self, bg="#222529")
         #canvas.create_rectangle(10, 20, 630, 200, width=1, outline="white", fill='#222529')
@@ -49,11 +50,8 @@ class sim(Frame):
             s.close()
 
         def arp_req():
-            print('')
-            os.system("arp -a")
-            print('')
-
-
+            arpp = os.system("arp -a")
+            cmdbox.insert('end', arpp,'\n')
 
         def GetMacInput():
             mac_inp = macbox.get(1.0, "end-1c")
@@ -61,16 +59,16 @@ class sim(Frame):
                 WakeOnLan(mac_inp)
                 cmdbox.insert('end', "Waking up "+mac_inp+'\n')
             else:
-                cmdbox.insert('end', f"{Red}You need to enter a MAC Address first\nseparated by ':' not '-'\n")
+                cmdbox.insert('end', f"You need to enter a MAC Address first\nseparated by ':' not '-'\n")
             #WakeOnLan(macaddr)
 
         def GetIPInput():
             ip_inp = macbox.get(1.0, "end-1c")
             if ip_inp:
-                arp_a = os.system("arp -a "+ ip_inp)
-                cmdbox.insert('end', arp_a)
+                arp_n = os.system("arp -i eth0 "+ ip_inp)
+                cmdbox.insert('end', arp_n)
             else:
-                print("\nYou need to enter an IP Address first\n")
+                cmdbox.insert('end', f"You need to enter an IP Address first\n")
             #WakeOnLan(macaddr)
 
         def ClearCmdbox():
@@ -81,7 +79,7 @@ class sim(Frame):
         self.button1.place(x=10, y=65)
         self.button2 = Button(root, font=myfont, bg='#dbdbdb', text="arp -a", command=arp_req, height=1, width=7, borderwidth=0, relief=SOLID)
         self.button2.place(x=10, y=100)
-        self.button2 = Button(root, font=myfont, bg='#dbdbdb', text="arp -S <IP>", command=GetIPInput, height=1, width=7, borderwidth=0, relief=SOLID)
+        self.button2 = Button(root, font=myfont, bg='#dbdbdb', text="arp -s <IP>", command=GetIPInput, height=1, width=7, borderwidth=0, relief=SOLID)
         self.button2.place(x=92, y=100)
         self.button3 = Button(root, font=myfont, bg='#dbdbdb', text="Clear Output", command=ClearCmdbox, height=1, width=19, borderwidth=0, relief=SOLID)
         self.button3.place(x=10, y=185)
