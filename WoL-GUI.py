@@ -1,6 +1,10 @@
+from asyncio import subprocess
+from distutils import cmd
 from tkinter import *
 import struct, socket
 import os
+from subprocess import Popen, PIPE
+from sqlalchemy import true
      
 class sim(Frame):
     def __init__(self, master=None):
@@ -13,8 +17,8 @@ class sim(Frame):
         #canvas.create_rectangle(10, 20, 630, 200, width=1, outline="white", fill='#222529')
         canvas.pack(fill=BOTH, expand=1)
         # Text Label
-        self.label = Label(master, font=("Century Gothic", 9), text="Wake on LAN", bg='#222529', fg='white')
-        self.label.place(x=25, y=10)
+        self.label = Label(master, font=("Century Gothic", 9), text="MAC Address", bg='#222529', fg='white')
+        self.label.place(x=45, y=10)
 
         # Wake-On-LAN
         #
@@ -23,7 +27,7 @@ class sim(Frame):
         # This code is free software under the GPL
         #
         # Source : http://wiki.bashlinux.com/index.php/Wake-on-LAN
-        macaddr= 'ff:ff:ff:ff:ff:ff'
+        macaddr= 'd0:50:99:76:34:00'
         def WakeOnLan(ethernet_address):
             # Construct a six-byte hardware address
             addr_byte = ethernet_address.split(':')
@@ -46,21 +50,42 @@ class sim(Frame):
             
         def GetMacInput():
             mac_inp = macbox.get(1.0, "end-1c")
-            WakeOnLan(mac_inp)
+            if mac_inp:
+                WakeOnLan(mac_inp)
+                print("Waking up "+mac_inp)
+            else:
+                print('You need to enter a MAC Address')
             #WakeOnLan(macaddr)
-            print("Waking up "+mac_inp)
+        def clear_cmdbox():
+            cmdbox.delete('end')
+            print('cleared')
 
         # Button
-        self.button1 = Button(root, font=myfont, bg='#dbdbdb', text="Wake", command=GetMacInput, height=1, width=15, borderwidth=1, relief=SOLID)
-        self.button1.place(x=20, y=45)
-        self.button2 = Button(root, font=myfont, bg='#dbdbdb', text="arp -a", command=arp_req, height=1, width=15, borderwidth=1, relief=SOLID)
-        self.button2.place(x=20, y=165)
+        self.button1 = Button(root, font=myfont, bg='#dbdbdb', text="Wake Up", command=GetMacInput, height=1, width=19, borderwidth=0, relief=SOLID)
+        self.button1.place(x=10, y=65)
+        self.button2 = Button(root, font=myfont, bg='#dbdbdb', text="arp -a", command=arp_req, height=1, width=19, borderwidth=0, relief=SOLID)
+        self.button2.place(x=10, y=100)
+        self.button3 = Button(root, font=myfont, bg='#dbdbdb', text="Clear Output", command=clear_cmdbox, height=1, width=19, borderwidth=0, relief=SOLID)
+        self.button3.place(x=10, y=185)
 
         macbox = Text(root, height=1, width=19, relief="sunken")
-        macbox.place(x=20, y=100)
+        macbox.place(x=10, y=30)
         
-        self.cmdbox = Text(root, height=7, width=50, relief="sunken")
-        self.cmdbox.place(x=190, y=30)
+        output = "Output testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest"
+        cmdbox = Text(root, height=13, width=63, relief="sunken", wrap='char', font=('Consolas', 9), bg='#000000', fg='#00FF80')
+        cmdbox.place(x=180, y=10)
+        cmdbox.insert('end', output)
+        cmdbox.config(state='disabled')
+        #sb = Scrollbar(root)
+        #sb.pack(side=RIGHT, fill=BOTH)
+        #cmdbox.config(yscrollcommand=sb.set)
+        #sb.config(command=cmdbox.yview)
+        
+
+        #with subprocess.Popen("ls -la", shell=True, stdout=subprocess.PIPE, bufsize=1, universal_newlines=True) as p:
+        #    for line in p.stdout:
+        #        cmdbox.insert(tk.END, line)
+    
         
 
 root = Tk()
