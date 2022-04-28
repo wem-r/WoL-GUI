@@ -11,5 +11,5 @@ Simply enter a MAC address and press wake up
 <p align="center"><img src="img2.png"></p> 
 
 **TO DO**:
-- Make the `saved MAC Addresses` box working, for now it's just a simple text box.
+- Make the `saved MAC Addresses` box working, for now it's just a simple (useless) text box.
 - Redirect the output of the `arp -a` button in the text box instead of the terminal 
