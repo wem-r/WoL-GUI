@@ -15,9 +15,9 @@ class sim(Frame):
         canvas.pack(fill=BOTH, expand=1)
         # Text Label
         self.label1 = Label(master, font=("Century Gothic", 9), text="MAC Address", bg='#222529', fg='white')
-        self.label1.place(x=46, y=10)
-        self.label2 = Label(master, font=("Century Gothic", 7), text="Saved MAC Addresses", bg='#222529', fg='white')
-        self.label2.place(x=35, y=133)
+        self.label1.place(x=46, y=8)
+        self.label2 = Label(master, font=("Century Gothic", 8), text="Saved MAC Addresses", bg='#222529', fg='white')
+        self.label2.place(x=27, y=120)
 
         # Wake-On-LAN
         #
@@ -58,21 +58,21 @@ class sim(Frame):
             cmdbox.delete(1.0, 'end')
 
         # Button
-        self.button1 = Button(root, font=myfont, bg='#dbdbdb', text="Wake Up", command=GetMacInput, height=1, width=19, borderwidth=0, relief=SOLID)
-        self.button1.place(x=10, y=65)
-        self.button2 = Button(root, font=myfont, bg='#dbdbdb', text="arp -a", command=arp_req, height=1, width=7, borderwidth=0, relief=SOLID)
-        self.button2.place(x=10, y=100)
-        self.button2 = Button(root, font=myfont, bg='#dbdbdb', text="Clear Output", command=ClearCmdbox, height=1, width=7, borderwidth=0, relief=SOLID)
-        self.button2.place(x=92, y=100)
+        self.button1 = Button(root, font=myfont, bg='#dbdbdb', text="Wake Up", command=GetMacInput, height=1, width=22, borderwidth=0, relief=SOLID)
+        self.button1.place(x=10, y=57)
+        self.button2 = Button(root, font=myfont, bg='#dbdbdb', text="arp -a", command=arp_req, height=1, width=10, borderwidth=0, relief=SOLID)
+        self.button2.place(x=10, y=86)
+        self.button2 = Button(root, font=myfont, bg='#dbdbdb', text="Clear Output", command=ClearCmdbox, height=1, width=10, borderwidth=0, relief=SOLID)
+        self.button2.place(x=93, y=86)
 
         # Text Box
         macbox = Text(root, height=1, width=19, relief="sunken")
-        macbox.place(x=10, y=30)
-        cmdbox = Text(root, height=13, width=63, relief="sunken", wrap='char', font=('Consolas', 9), bg='#000000', fg=Green)
+        macbox.place(x=11, y=30)
+        cmdbox = Text(root, height=14, width=64, relief="sunken", wrap='char', font=('Consolas', 9), bg='#000000', fg=Green)
         cmdbox.place(x=180, y=10)
         #cmdbox.config(state='disabled')
-        savedmacbox = Text(root, height=4, width=25, relief="sunken", wrap='char', font=('Consolas', 7), bg='#ffffff', fg=Blue)
-        savedmacbox.place(x=10, y=155)
+        savedmacbox = Text(root, height=6, width=31, relief="sunken", wrap='char', font=('Consolas', 7), bg='#ffffff', fg=Blue)
+        savedmacbox.place(x=10, y=144)
 
 root = Tk()
 mygui = sim(root).configure(bg='#222529')
