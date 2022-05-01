@@ -1,8 +1,8 @@
-Because I'm lazy and I dont want to get up every time I need to boot up my proxmox server, I made this.
+Because I'm lazy and I dont want to get up and open my rack every time I need to boot up my Proxmox/XCP-ng server, I made this.
 
 <p align="center"><img src="img1.png"></p>
 
-It's basically just [this script](http://wiki.bashlinux.com/index.php/Wake-on-LAN) but with a GUI (made with tkinter) on top of it.
+It's basically just [this script](http://wiki.bashlinux.com/index.php/Wake-on-LAN) but with a GUI (made with [tkinter](https://docs.python.org/fr/3/library/tkinter.html)) on top of it.
 
 ---
 
